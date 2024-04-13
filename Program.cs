@@ -1,3 +1,4 @@
+using E_Handel.Extras;
 using E_Handel.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IProduktService, ProduktService>();
+builder.Services.AddScoped<IDBContext, AppDbContext>();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 

@@ -1,4 +1,5 @@
-﻿using E_Handel.Extras;
+﻿using Dapper;
+using E_Handel.Extras;
 using E_Handel.Models;
 using Microsoft.Data.SqlClient;
 
@@ -24,12 +25,19 @@ namespace E_Handel.Services
 
         public IEnumerable<Produkt> GetAllProducts()
         {
-            throw new NotImplementedException();
+            using (_connectionString)
+            {
+                return _connectionString.Query<Produkt>("SELECT * FROM Produkt");
+            }
         }
 
-        public Produkt GetProductById(int productId)
+        public Produkt GetProductById(int produktId)
         {
-            throw new NotImplementedException();
+            using (_connectionString)
+            {
+                return _connectionString.Query<Produkt>
+                    ("SELECT * FROM Produkt WHERE Id = @ProduktId", new { ProduktId = produktId }).FirstOrDefault();
+            }
         }
 
         public void UpdateProduct(Produkt product)
