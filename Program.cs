@@ -11,6 +11,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        policy => policy.WithOrigins("http://localhost:5173")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials()); // Adjust this based on your specific needs
+});
+
 builder.Services.AddScoped<IProduktService, ProduktService>();
 builder.Services.AddScoped<IDBContext, AppDbContext>();
 
@@ -28,6 +37,10 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseHttpsRedirection();
+
+app.UseRouting();
+
+app.UseCors("AllowAll");
 
 app.UseAuthorization();
 
