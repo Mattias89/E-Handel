@@ -38,6 +38,17 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        policy =>
+        {
+            policy.WithOrigins("https://mattiashandelweb.azurewebsites.net")
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        });
+});
+
 app.UseCors("AllowAll");
 
 app.UseAuthorization();
