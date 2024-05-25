@@ -14,7 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
-        policy => policy.WithOrigins("http://localhost:5173")
+        policy => policy.WithOrigins("https://mattiashandelweb.azurewebsites.net")
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowCredentials()); // Adjust this based on your specific needs
@@ -37,17 +37,6 @@ app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseRouting();
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll",
-        policy =>
-        {
-            policy.WithOrigins("https://mattiashandelweb.azurewebsites.net")
-                  .AllowAnyMethod()
-                  .AllowAnyHeader();
-        });
-});
 
 app.UseCors("AllowAll");
 
