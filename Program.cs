@@ -14,10 +14,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
-        policy => policy.WithOrigins("https://mattiashandel.azurewebsites.net")
+        policy => policy.AllowAnyOrigin()
                         .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .AllowCredentials()); // Adjust this based on your specific needs
+                        .AllowAnyHeader());
+                        //.AllowCredentials()); // Adjust this based on your specific needs
 });
 
 builder.Services.AddScoped<IProduktService, ProduktService>();
